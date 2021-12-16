@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const data = await fetch(`https://the-one-api.dev/v2/book`, {
+    headers: {
+      Authorization: `token ${import.meta.env.PUBLIC_AUTH_TOKEN}`,
+    }
+  }).then(response => response.json());
+  
+  return data.docs.map(book => {
+    return {
+      params: { id: book._id },
+      props: {
+        id: book._id,
+        name: book.name,
+      },
+    }
+  });
+}
+const { name, id } = Astro.props;
+---
+<BaseLayout>
+  <h1>{name} (Book)</h1>
+  <img src={`/images/books/${id}.jpg`} />
+</BaseLayout>
