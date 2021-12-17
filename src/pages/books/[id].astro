@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 export async function getStaticPaths() {
   const data = await fetch(`https://the-one-api.dev/v2/book`, {
     headers: {
-      Authorization: `token ${import.meta.env.PUBLIC_AUTH_TOKEN}`,
+      'Authorization': `Bearer ${import.meta.env.PUBLIC_AUTH_TOKEN}`,
     }
   }).then(response => response.json());
   
