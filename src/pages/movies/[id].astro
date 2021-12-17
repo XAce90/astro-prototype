@@ -1,8 +1,8 @@
 ---
-<!-- todo: explore [...movies] filename syntax -->
+// todo: explore [...movies] filename syntax
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-<!-- todo: is there a way to set the authorization once instead of every call? -->
+// todo: is there a way to set the authorization once instead of every call?
 export async function getStaticPaths() {
   const data = await fetch(`https://the-one-api.dev/v2/movie`, {
     headers: {

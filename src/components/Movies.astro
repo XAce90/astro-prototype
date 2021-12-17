@@ -22,7 +22,7 @@ const movies = data.docs;
   <p>Learn more about your favorite Lord of the Rings movie.</p>
   <ul>
     {movies.map((movie => {
-      //if (movie._id === '5cd95395de30eff6ebccde57' || movie._id = '5cd95395de30eff6ebccde56') return null;
+      // only show the original trilogy
       if (
         movie._id === '5cd95395de30eff6ebccde5c' // Fellowship
         || movie._id === '5cd95395de30eff6ebccde5b' // Two Towers
