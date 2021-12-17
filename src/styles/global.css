@@ -30,6 +30,15 @@ p {
   margin-bottom: 1rem;
 }
 
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
 footer {
   justify-self: flex-end;
 }

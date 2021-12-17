@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// todo: is there a way to set the authorization once instead of every call?
+export async function getStaticPaths() {
+  const data = await fetch(`https://the-one-api.dev/v2/movie`, {
+    headers: {
+      'Authorization': `Bearer ${import.meta.env.PUBLIC_AUTH_TOKEN}`,
+    }
+  }).then(response => response.json());
+  
+  return data.docs.map(movie => {
+    return {
+      params: { movie: movie._id },
+      props: {
+        id: movie._id,
+        name: movie.name,
+        runtime: movie.runtimeInMinutes,
+        budget: movie.budgetInMillions,
+        revenue: movie.boxOfficeRevenueInMillions,
+        academyAwardNoms: movie.academyAwardNominations,
+        academyAwardWins: movie.academyAwardWins,
+        rottenTomatoesScore: movie.rottenTomatoesScore,
+      },
+    }
+  });
+}
+const { 
+  name,
+  id,
+  runtime,
+  budget,
+  revenue,
+  academyAwardNoms,
+  academyAwardWins,
+  rottenTomatoesScore,
+} = Astro.props;
+const profit = revenue - budget;
+---
+<style>
+  .movie {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+  }
+</style>
+<BaseLayout>
+  <h1>{name} (movie)</h1>
+  <div class="movie">
+    <div class="movie__image">
+      <img src={`/images/movies/${id}.jpg`} />
+    </div>
+    <div class="movie__details">
+      <dl>
+        <dt>Name:</dt>
+        <dd>{name}</dd>
+
+        <dt>Runtime:</dt>
+        <dd>{runtime} minutes</dd>
+
+        <dt>RottenTomatoes Score:</dt>
+        <dd>{rottenTomatoesScore}</dd>
+
+        <dt>Budget:</dt>
+        <dd>{budget}</dd> <!-- todo: convert to $$$ and millions -->
+
+        <dt>Revenue:</dt>
+        <dd>{revenue}</dd> <!-- todo: convert to $$$ and millions -->
+
+        <dt>Profit:</dt>
+        <dd>{profit}</dd> <!-- todo: convert to $$$ and millions -->
+
+        <dt>Academy Award Nomations:</dt>
+        <dd>{academyAwardNoms}</dd>
+
+        <dt>Academy Award Wins:</dt>
+        <dd>{academyAwardWins}</dd>
+      </dl>
+    </div>
+  </div>
+</BaseLayout>

@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   
   return data.docs.map(book => {
     return {
-      params: { id: book._id },
+      params: { book: book._id },
       props: {
         id: book._id,
         name: book.name,
