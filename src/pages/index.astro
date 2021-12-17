@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Books from '../components/Books.astro';
+import Movies from '../components/Movies.astro';
 ---
 
 <BaseLayout>
@@ -14,6 +15,8 @@ import Books from '../components/Books.astro';
   
   <Books />
 
-  <!-- <Movies /> -->
+  <div style="margin-top: 1rem;" /> <!-- todo: pass this as prop into Movies? -->
+
+  <Movies />
   
 </BaseLayout>
